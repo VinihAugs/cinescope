@@ -4,15 +4,12 @@ import { RouterLink } from 'vue-router';
 import MovieCard from '../components/MovieCard.vue';
 import UiButton from '../components/ui/UiButton.vue';
 import UiModal from '../components/ui/UiModal.vue';
-import DevModeDrawer from '../components/DevModeDrawer.vue';
 import { useMovies } from '../composables/useMovies';
 import { useMovieDetails } from '../composables/useMovieDetails';
 import { useWatchlistStore } from '../stores/watchlist';
-import { useUiStore } from '../stores/ui';
 import type { MovieSummary } from '../types/movies';
 
 const watchlist = useWatchlistStore();
-const ui = useUiStore();
 const moviesApi = useMovies();
 const detailsApi = useMovieDetails();
 
@@ -98,10 +95,9 @@ watch(
             >
               Assistir Depois ({{ watchlist.count }})
             </RouterLink>
-            <button
+            <RouterLink
+              to="/bastidores"
               class="inline-flex items-center gap-2 text-neutral-500 hover:text-white transition-colors"
-              @click="ui.openDevMode()"
-              type="button"
             >
               <span
                 class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-neutral-900 border border-neutral-800 text-red-500 font-black"
@@ -110,7 +106,7 @@ watch(
                 &lt;/&gt;
               </span>
               <span class="hidden lg:inline font-bold">Bastidores</span>
-            </button>
+            </RouterLink>
           </div>
         </div>
 
@@ -345,21 +341,15 @@ watch(
         </svg>
         <span class="text-[10px] font-bold">Lista</span>
       </RouterLink>
-      <button
-        type="button"
-        class="flex flex-col items-center gap-1 text-neutral-400"
-        @click="ui.openDevMode()"
-      >
+      <RouterLink to="/bastidores" class="flex flex-col items-center gap-1 text-neutral-400">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M8 9l-3 3 3 3"></path>
           <path d="M16 9l3 3-3 3"></path>
           <path d="M14 7l-4 10"></path>
         </svg>
         <span class="text-[10px] font-bold">Dev</span>
-      </button>
+      </RouterLink>
     </div>
-
-    <DevModeDrawer :open="ui.devModeOpen" @close="ui.closeDevMode()" />
 
     <footer class="fixed left-0 right-0 bottom-16 md:bottom-0 z-30 border-t border-white/10 bg-neutral-950/80 backdrop-blur-lg">
       <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between text-xs">

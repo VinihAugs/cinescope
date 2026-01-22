@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import('../views/HomeView.vue'),
     },
     {
+      path: '/bastidores',
+      name: 'devmode',
+      component: () => import('../views/DevModeView.vue'),
+    },
+    {
       path: '/assistir-depois',
       name: 'watchlist',
       component: () => import('../views/WatchlistView.vue'),
