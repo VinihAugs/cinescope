@@ -97,7 +97,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown));
 </script>
 
 <template>
-  <div class="min-h-screen pb-32 pt-24">
+  <div class="min-h-screen pb-32 pt-36">
     <nav
       class="fixed top-0 left-0 right-0 z-40 bg-neutral-950/80 backdrop-blur-lg border-b border-white/10 px-6 py-4"
     >
@@ -120,6 +120,28 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown));
         </div>
       </div>
     </nav>
+
+    <div class="fixed top-[72px] left-0 right-0 z-30 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="bg-neutral-950/90 backdrop-blur-lg border border-white/10 rounded-2xl p-3 shadow-xl shadow-black/20">
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+            <button
+              v-for="t in tabs"
+              :key="t"
+              class="px-4 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap"
+              :class="
+                active === t
+                  ? 'bg-red-600 text-white'
+                  : 'bg-neutral-900 text-neutral-400 hover:bg-neutral-800 hover:text-white'
+              "
+              @click="active = t"
+            >
+              {{ t }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <main class="max-w-7xl mx-auto px-6">
       <header class="mb-6">
@@ -149,24 +171,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown));
           <UiButton variant="ghost" class="hidden md:inline-flex" @click="$router.back()">Fechar</UiButton>
         </div>
       </header>
-
-      <div class="sticky top-[84px] z-10 bg-neutral-950/70 backdrop-blur-lg border border-white/10 rounded-2xl p-3">
-        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
-          <button
-            v-for="t in tabs"
-            :key="t"
-            class="px-4 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap"
-            :class="
-              active === t
-                ? 'bg-red-600 text-white'
-                : 'bg-neutral-900 text-neutral-400 hover:bg-neutral-800 hover:text-white'
-            "
-            @click="active = t"
-          >
-            {{ t }}
-          </button>
-        </div>
-      </div>
 
       <div class="mt-5 space-y-4">
         <div
